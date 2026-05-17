@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT" immediateFlush="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red,ERROR=red,WARN=yellow,INFO=green,DEBUG=green,TRACE=green} %style{%pid}{magenta} [%style{%t}{bright,blue}]  %style{%c{1.1.1.*}}{cyan,bright} : %msg%n%ex %throwable{short.methodName}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="za.co.mkhungo.dsa" level="debug" additivity="false">
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+        <Logger name="za.co.mkhungo.dsa.common" level="debug" additivity="false">
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+        <Root level="trace">
+            <AppenderRef ref="LogToConsole"/>
+        </Root>
+    </Loggers>
+</Configuration>
