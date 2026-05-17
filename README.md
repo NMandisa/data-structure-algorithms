@@ -739,3 +739,7 @@ ALGORITHM COMPARISON:
 | QuickSort | O(n log n) / O(n²) | O(log n) | No | Yes | ⚠️ Risk of O(n²) on sorted data |
 | MergeSort | O(n log n) / O(n log n) | O(n) | Yes | No | ✅ Stable, guaranteed, but needs memory |
 | HeapSort  | O(n log n) / O(n log n) | O(1) | No | Yes | ✅ Guaranteed + in-place, but slower constant 
+
+> 🤖 **GenAI note:** This project was built with the help of generative AI.  
+> Human: design, testing, accountability. AI: brainstorming, code drafts, review.  
+> See [LICENSE](./LICENSE) for full details.

@@ -1,6 +1,5 @@
-package za.co.mkhung.dsa.common;
+package za.co.mkhungo.dsa.common;
 
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 
@@ -15,7 +14,7 @@ import java.util.Arrays;
  * @author Noxolo Mkhungo
  * @date 2026
  */
-@Slf4j  // ← Generates private static final Logger log
+//@Slf4j  // ← Generates private static final Logger log
 public class ArrayPrinter {
 
     /**

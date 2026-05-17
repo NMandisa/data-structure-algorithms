@@ -1,6 +1,4 @@
-package za.co.mkhung.dsa.common;
-
-import lombok.extern.slf4j.Slf4j;
+package za.co.mkhungo.dsa.common;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -16,7 +14,7 @@ import java.util.function.Consumer;
  * @author Noxolo Mkhungo
  * @date 2026
  */
-@Slf4j  // ← Generates private static final Logger log
+//@Slf4j  // ← Generates private static final Logger log
 public class SortTester {
 
     /** Functional interface for sorting algorithms */

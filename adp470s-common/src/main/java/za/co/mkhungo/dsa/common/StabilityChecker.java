@@ -1,10 +1,7 @@
-package za.co.mkhung.dsa.common;
-
-import lombok.extern.slf4j.Slf4j;
+package za.co.mkhungo.dsa.common;
 
 /**
  * StabilityChecker — Verify if a sort preserves relative order of equal keys.
- *
  * 🔑 Key Concept:
  * A stable sort maintains the original order of elements with equal keys.
  * Critical when sorting by multiple criteria (e.g., sort by grade, then by name).
@@ -12,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author Noxolo Mkhungo
  * @date 2026
  */
-@Slf4j  // ← Generates private static final Logger log
+//@Slf4j  // ← Generates private static final Logger log
 public class StabilityChecker {
 
     /**

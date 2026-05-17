@@ -4,18 +4,41 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>za.co.mkhung.dsa</groupId>
+        <groupId>za.co.mkhungo.dsa</groupId>
         <artifactId>adp470s-practice-parent</artifactId>
         <version>1.0.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <artifactId>adp470s-queue</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>24</maven.compiler.source>
-        <maven.compiler.target>24</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <!-- Inherit from parent: JUnit, Lombok, SLF4J -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Optional: common utilities -->
+        <dependency>
+            <groupId>za.co.mkhungo.dsa</groupId>
+            <artifactId>adp470s-common</artifactId>
+        </dependency>
+    </dependencies>
+
+
 
 </project>
