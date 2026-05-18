@@ -1,5 +1,15 @@
 # DATA STRUCTURES & ALGORITHMS
 
+## 🗂️ Quick Navigation
+- [Chapter 1: Big-O](#chapter-1--big-o-notation--loop-analysis)
+- [Chapter 2: Foundations](#chapter-2--foundations-data-structures--adts)
+- [Chapter 3: Queue Theory](#chapter-3--queue-theory-linear--circular--linked-list)
+- [Chapter 4: Recursion](#chapter-4--recursion-vs-iteration)
+- [Chapter 5: Sorting](#chapter-5--sorting-algorithms)
+- [Chapter 6: Exam Technique](#chapter-6--exam-technique--cheat-sheet)
+- [Chapter 7: Predictions](#chapter-7--exam-predictions--model-answers)
+- [Subject Guide Coverage](#subject-guide-coverage-summary)
+
 ### 📐 DOCUMENT STRUCTURE (Conceptual Build-Up Order)
 1. **CHAPTER 1 — Big-O Notation & Loop Analysis** *(The Ruler: How we measure efficiency)*  
 2. **CHAPTER 2 — Foundations: Data Structures & ADTs** *(The Objects: What we measure)*  
@@ -21,33 +31,33 @@
 ### 1.1 — What Big-O Means
 Big-O = **worst-case upper bound** on how the number of operations grows with input size `n`. Constants and lower-order terms are always dropped.
 
-| Notation | Meaning | Example |
-|----------|---------|---------|
-| `O(g(n))` | Upper bound — worst case | Binary search: `O(log n)` |
-| `Ω(g(n))` | Lower bound — best case | Linear search best: `Ω(1)` |
+| Notation  | Meaning                                   | Example                                         |
+|-----------|-------------------------------------------|-------------------------------------------------|
+| `O(g(n))` | Upper bound — worst case                  | Binary search: `O(log n)`                       |
+| `Ω(g(n))` | Lower bound — best case                   | Linear search best: `Ω(1)`                      |
 | `Θ(g(n))` | Tight bound — exact growth (both O and Ω) | Binary search: `Θ(log n)` — all cases identical |
 
 🔍 **Exam note:** Big O is only an upper bound. Use `Θ` when best and worst cases are the same rate — it is the more precise statement.  
 ⚠️ **Trap:** Never say "Big O = complexity". Say: "The algorithm has `Θ(n log n)` time complexity because best, average, and worst cases all grow logarithmically."
 
 ### 1.2 — The Five Rules (Memorise These)
-| Rule | Pattern | Big-O | Reason |
-|------|---------|-------|--------|
-| 1 — Single Loop | `for i = 0; i < n; i++` | `O(n)` | `n` iterations |
-| 2 — Sequential Loops | Loop A then Loop B (back-to-back) | `O(n)` | ADD: `O(n)+O(n)=O(2n)→O(n)` |
-| 3 — Nested Loops | `for i { for j }` | `O(n²)` | MULTIPLY: `n × n` |
-| 4 — Logarithmic Step | `j = j*2` or `j = j*3` per iteration | `O(log n)` | Multiplying: `2^k=n → k=log n` |
-| 5 — Nested Log-Linear | `O(n)` outer × `O(log n)` inner | `O(n log n)` | MULTIPLY the two |
+| Rule                  | Pattern                              | Big-O        | Reason                         |
+|-----------------------|--------------------------------------|--------------|--------------------------------|
+| 1 — Single Loop       | `for i = 0; i < n; i++`              | `O(n)`       | `n` iterations                 |
+| 2 — Sequential Loops  | Loop A then Loop B (back-to-back)    | `O(n)`       | ADD: `O(n)+O(n)=O(2n)→O(n)`    |
+| 3 — Nested Loops      | `for i { for j }`                    | `O(n²)`      | MULTIPLY: `n × n`              |
+| 4 — Logarithmic Step  | `j = j*2` or `j = j*3` per iteration | `O(log n)`   | Multiplying: `2^k=n → k=log n` |
+| 5 — Nested Log-Linear | `O(n)` outer × `O(log n)` inner      | `O(n log n)` | MULTIPLY the two               |
 
  **Golden rule:** Sequential = ADD. Nested = MULTIPLY. Constant factors (step `+3`, `×2`, `÷3`) are ALWAYS dropped.
 
 ### 1.3 — Past Exam Code Patterns (Solved)
-| Pattern | Analysis | Answer |
-|---------|----------|--------|
-| Two separate loops, both `0→n` | Loop A: `O(n)` + Loop B: `O(n)` = `O(2n)` → drop constant | `O(n)` |
-| Outer `O(n)`; inner `j = j*3` | Outer: `O(n)` × Inner: `O(log₃n)` = `O(n log n)` | `O(n log n)` |
-| Outer `i+=3`; inner `j--` from `n` | Outer: `n/3 = O(n)` × Inner: `O(n)` — nested | `O(n²)` |
-| Single while: `n = n/2` | Halving: `O(log n)` | `O(log n)` |
+| Pattern                            | Analysis                                                  | Answer       |
+|------------------------------------|-----------------------------------------------------------|--------------|
+| Two separate loops, both `0→n`     | Loop A: `O(n)` + Loop B: `O(n)` = `O(2n)` → drop constant | `O(n)`       |
+| Outer `O(n)`; inner `j = j*3`      | Outer: `O(n)` × Inner: `O(log₃n)` = `O(n log n)`          | `O(n log n)` |
+| Outer `i+=3`; inner `j--` from `n` | Outer: `n/3 = O(n)` × Inner: `O(n)` — nested              | `O(n²)`      |
+| Single while: `n = n/2`            | Halving: `O(log n)`                                       | `O(log n)`   |
 
 ⚠️ **COMMON MISTAKES THAT COST MARKS**
 | ❌ Wrong | ✅ Correct | Why |
@@ -59,14 +69,14 @@ Big-O = **worst-case upper bound** on how the number of operations grows with in
 | Reverse loop `j--` is different | Same `O(n)` | Direction has no effect on iteration count |
 
 ### 1.4 — Complexity Growth Hierarchy
-| Big-O | Name | For n = 1,000 (approx ops) |
-|-------|------|---------------------------|
-| `O(1)` | Constant | 1 |
-| `O(log n)` | Logarithmic | ~10 |
-| `O(n)` | Linear | 1,000 |
-| `O(n log n)` | Linearithmic | 10,000 |
-| `O(n²)` | Quadratic | 1,000,000 |
-| `O(2ⁿ)` | Exponential | astronomical |
+| Big-O        | Name         | For n = 1,000 (approx ops) |
+|--------------|--------------|----------------------------|
+| `O(1)`       | Constant     | 1                          |
+| `O(log n)`   | Logarithmic  | ~10                        |
+| `O(n)`       | Linear       | 1,000                      |
+| `O(n log n)` | Linearithmic | 10,000                     |
+| `O(n²)`      | Quadratic    | 1,000,000                  |
+| `O(2ⁿ)`      | Exponential  | astronomical               |
 
 🧠 **Key insight:** A small change in complexity class massively affects scalability at large `n`. `O(n²)` and `O(n log n)` may look similar for `n=10` but diverge completely at `n=100,000`.
 
@@ -92,22 +102,22 @@ For an algorithm to be correct, it must satisfy:
 ⚠️ **Exam trap:** Never write `"Queue = LinkedList"`. Write: `"A Queue is a FIFO ADT; it can be implemented using an array or a linked list."`
 
 ### 2.2 — Linear vs Non-Linear: The Fundamental Split
-| Aspect | Linear | Non-Linear |
-|--------|--------|------------|
-| Arrangement | Single, straight sequence — one path through all elements | Elements branch or connect in multiple directions |
-| Predecessor / Successor | Exactly one of each (except endpoints) | May have multiple predecessors and/or successors |
-| Traversal | Forward or backward along the sequence | Depth-first, breadth-first, or multi-path |
-| Examples | Array, Linked List, Stack, Queue | BST, Heap, Graph |
+| Aspect                  | Linear                                                    | Non-Linear                                        |
+|-------------------------|-----------------------------------------------------------|---------------------------------------------------|
+| Arrangement             | Single, straight sequence — one path through all elements | Elements branch or connect in multiple directions |
+| Predecessor / Successor | Exactly one of each (except endpoints)                    | May have multiple predecessors and/or successors  |
+| Traversal               | Forward or backward along the sequence                    | Depth-first, breadth-first, or multi-path         |
+| Examples                | Array, Linked List, Stack, Queue                          | BST, Heap, Graph                                  |
 
 💡 **Memory hook:** Linear = line. Non-linear = network.
 
 ### 2.3 — The Four Core Linear Structures
-| Structure | ADT Rule | Key Operations | Array Implementation | Linked-List Implementation | Access Complexity |
-|-----------|----------|---------------|---------------------|---------------------------|------------------|
-| Array | Random access by index | read, write, index | Fixed size, `O(1)` access | — | Access `O(1)`, Insert/Delete `O(n)` |
-| Linked List | Sequential access via pointers | insert, delete, search | — | Dynamic size, `O(1)` at ends | Access `O(n)`, Insert/Delete `O(1)` at known position |
-| Stack | LIFO | push, pop, peek | Fixed capacity, `O(1)` | Unbounded, `O(1)` | All ops `O(1)`; call stack for recursion |
-| Queue | FIFO | enqueue, dequeue, peek | Linear (waste) or Circular (modulo) | Head/tail pointers, `O(1)` | All ops `O(1)` |
+| Structure   | ADT Rule                       | Key Operations         | Array Implementation                | Linked-List Implementation   | Access Complexity                                     |
+|-------------|--------------------------------|------------------------|-------------------------------------|------------------------------|-------------------------------------------------------|
+| Array       | Random access by index         | read, write, index     | Fixed size, `O(1)` access           | —                            | Access `O(1)`, Insert/Delete `O(n)`                   |
+| Linked List | Sequential access via pointers | insert, delete, search | —                                   | Dynamic size, `O(1)` at ends | Access `O(n)`, Insert/Delete `O(1)` at known position |
+| Stack       | LIFO                           | push, pop, peek        | Fixed capacity, `O(1)`              | Unbounded, `O(1)`            | All ops `O(1)`; call stack for recursion              |
+| Queue       | FIFO                           | enqueue, dequeue, peek | Linear (waste) or Circular (modulo) | Head/tail pointers, `O(1)`   | All ops `O(1)`                                        |
 
 ✨ **Stack + Recursion Link**  
 The call stack used in recursion IS a stack data structure. Each recursive call pushes a frame; each return pops it. This is why deep recursion can cause `StackOverflowError` — the stack ADT has finite capacity.
@@ -115,11 +125,11 @@ The call stack used in recursion IS a stack data structure. Each recursive call 
 🧠 **Is a Stack linear?** YES. The ADT defines a LIFO sequence — that is linear. The implementation (array or linked list) does not change its classification.
 
 ### 2.4 — Non-Linear Structures (Why They Exist)
-| Structure | Mechanism | Key Complexity | Exam Note |
-|-----------|-----------|---------------|-----------|
-| Binary Search Tree | Branching hierarchy; left < root < right | `O(log n)` avg search; `O(n)` unbalanced | Can degrade — needs balancing |
-| Heap | Complete binary tree with heap-order property | `O(log n)` insert/extract; `O(1)` peek max | Partial order only — not fully sorted |
-| Graph | Vertices connected by edges | `O(V+E)` BFS/DFS | Models networks, maps, dependencies |
+| Structure          | Mechanism                                     | Key Complexity                             | Exam Note                             |
+|--------------------|-----------------------------------------------|--------------------------------------------|---------------------------------------|
+| Binary Search Tree | Branching hierarchy; left < root < right      | `O(log n)` avg search; `O(n)` unbalanced   | Can degrade — needs balancing         |
+| Heap               | Complete binary tree with heap-order property | `O(log n)` insert/extract; `O(1)` peek max | Partial order only — not fully sorted |
+| Graph              | Vertices connected by edges                   | `O(V+E)` BFS/DFS                           | Models networks, maps, dependencies   |
 
 ---
 
@@ -129,14 +139,14 @@ The call stack used in recursion IS a stack data structure. Each recursive call 
 ### 3.1 — Queue ADT: Definition & Operations
 **Queue:** A linear ADT enforcing **FIFO** (First-In, First-Out) ordering. The element waiting longest is always removed first.
 
-| Operation | Action | Notes |
-|-----------|--------|-------|
-| `enqueue(x)` | Add element x to the REAR | Fails if queue is full (bounded impl) |
-| `dequeue()` | Remove and return the FRONT element | Fails if queue is empty |
-| `peek()` | Return front element — NO removal | NEVER modify front — exam trap |
-| `isEmpty()` | Return true iff size = 0 | `O(1)` |
-| `isFull()` | Return true iff size = capacity | Relevant only for bounded arrays |
-| `resize()` | Expand capacity (typically double) when full | Copy in circular order; reset `front=0`, `rear=size-1` |
+| Operation    | Action                                       | Notes                                                  |
+|--------------|----------------------------------------------|--------------------------------------------------------|
+| `enqueue(x)` | Add element x to the REAR                    | Fails if queue is full (bounded impl)                  |
+| `dequeue()`  | Remove and return the FRONT element          | Fails if queue is empty                                |
+| `peek()`     | Return front element — NO removal            | NEVER modify front — exam trap                         |
+| `isEmpty()`  | Return true iff size = 0                     | `O(1)`                                                 |
+| `isFull()`   | Return true iff size = capacity              | Relevant only for bounded arrays                       |
+| `resize()`   | Expand capacity (typically double) when full | Copy in circular order; reset `front=0`, `rear=size-1` |
 
 **When to Use a Queue:** Any scenario where order of arrival must be preserved: CPU scheduling, print spoolers, BFS traversal, IO buffers, call-centre hold lines.
 
@@ -149,10 +159,10 @@ Visualise the array as a straight row of lockers numbered `0` to `capacity−1`.
 - An enqueue now fails: `rear` cannot advance past the end, even though 5 vacant cells exist at the front
 - Fix by shifting all elements down → `O(n)` — unacceptable for a queue
 
-| Flaw | Effect | Cost of Workaround |
-|------|--------|-------------------|
-| Rear cannot wrap back | Vacated front cells permanently lost | `O(n)` shifting — defeats fast queue operations |
-| False 'full' condition | Queue reports full when capacity is available | Incorrect program behaviour |
+| Flaw                   | Effect                                        | Cost of Workaround                              |
+|------------------------|-----------------------------------------------|-------------------------------------------------|
+| Rear cannot wrap back  | Vacated front cells permanently lost          | `O(n)` shifting — defeats fast queue operations |
+| False 'full' condition | Queue reports full when capacity is available | Incorrect program behaviour                     |
 
 🧠 **Root cause:** Rear only moves forward. The only fix is to use modulo arithmetic to wrap it.
 
@@ -160,38 +170,40 @@ Visualise the array as a straight row of lockers numbered `0` to `capacity−1`.
 **Analogy:** Lockers arranged in a circle. After the last locker, the next is locker 0. No shifting — every vacated slot is reused automatically.
 
 **The Mathematical Formula:**
-| Movement | Formula | Example (capacity=10) |
-|----------|---------|----------------------|
-| Next rear position after enqueue | `(rear + 1) % capacity` | `rear=9 → next = (9+1)%10 = 0` |
+
+| Movement                          | Formula                  | Example (capacity=10)           |
+|-----------------------------------|--------------------------|---------------------------------|
+| Next rear position after enqueue  | `(rear + 1) % capacity`  | `rear=9 → next = (9+1)%10 = 0`  |
 | Next front position after dequeue | `(front + 1) % capacity` | `front=9 → next = (9+1)%10 = 0` |
 
 **Step-by-Step Trace (capacity = 5):**
-| Step | Operation | front | rear | Array [0..4] | Note |
-|------|-----------|-------|------|--------------|------|
-| 0 | (empty) | -1 | -1 | `[ , , , , ]` | Initial state |
-| 1 | `enqueue(A)` | 0 | 0 | `[A, , , , ]` | First element |
-| 2 | `enqueue(B)` | 0 | 1 | `[A,B, , , ]` | |
-| 3 | `enqueue(C)` | 0 | 2 | `[A,B,C, , ]` | |
-| 4 | `enqueue(D)` | 0 | 3 | `[A,B,C,D, ]` | |
-| 5 | `dequeue()→A` | 1 | 3 | `[ ,B,C,D, ]` | Locker 0 freed |
-| 6 | `enqueue(E)` | 1 | 4 | `[ ,B,C,D,E]` | rear reaches 4 |
-| 7 | `dequeue()→B` | 2 | 4 | `[ , ,C,D,E]` | |
-| 8 | `enqueue(F)` | 2 | 0 | `[F, ,C,D,E]` | rear WRAPS to 0 ← modulo |
-| 9 | `enqueue(G)` | 2 | 1 | `[F,G,C,D,E]` | Queue FULL (5 elements) |
-| 10 | `dequeue()→C` | 3 | 1 | `[F,G, ,D,E]` | |
-| 12 | `dequeue()→F` | 0 | 1 | `[ ,G, , , ]` | front WRAPS to 0 |
-| 14 | `dequeue()→G` | -1 | -1 | `[ , , , , ]` | Queue empty — reset |
+
+| Step | Operation     | front | rear | Array [0..4]  | Note                     |
+|------|---------------|-------|------|---------------|--------------------------|
+| 0    | (empty)       | -1    | -1   | `[ , , , , ]` | Initial state            |
+| 1    | `enqueue(A)`  | 0     | 0    | `[A, , , , ]` | First element            |
+| 2    | `enqueue(B)`  | 0     | 1    | `[A,B, , , ]` |                          |
+| 3    | `enqueue(C)`  | 0     | 2    | `[A,B,C, , ]` |                          |
+| 4    | `enqueue(D)`  | 0     | 3    | `[A,B,C,D, ]` |                          |
+| 5    | `dequeue()→A` | 1     | 3    | `[ ,B,C,D, ]` | Locker 0 freed           |
+| 6    | `enqueue(E)`  | 1     | 4    | `[ ,B,C,D,E]` | rear reaches 4           |
+| 7    | `dequeue()→B` | 2     | 4    | `[ , ,C,D,E]` |                          |
+| 8    | `enqueue(F)`  | 2     | 0    | `[F, ,C,D,E]` | rear WRAPS to 0 ← modulo |
+| 9    | `enqueue(G)`  | 2     | 1    | `[F,G,C,D,E]` | Queue FULL (5 elements)  |
+| 10   | `dequeue()→C` | 3     | 1    | `[F,G, ,D,E]` |                          |
+| 12   | `dequeue()→F` | 0     | 1    | `[ ,G, , , ]` | front WRAPS to 0         |
+| 14   | `dequeue()→G` | -1    | -1   | `[ , , , , ]` | Queue empty — reset      |
 
 🧠 **Key observations:** Whenever an index would reach capacity, modulo sends it to 0. Empty cells are reused immediately. The queue cycles indefinitely with no shifting.
 
 ### 3.4 — The Full-Detection Problem (Critical)
 **The ambiguity:** Using only `front` and `rear`, an empty and a full circular queue can both satisfy `(rear+1) % capacity == front`. The two states are indistinguishable without extra information.
 
-| Option | Mechanism | isEmpty Condition | isFull Condition | Trade-off |
-|--------|-----------|------------------|-----------------|-----------|
-| 1 — Size Counter | Maintain integer size | `size == 0` | `size == capacity` | ✅ Recommended — clean & clear |
-| 2 — Sacrifice One Slot | Leave one cell unused always | `front == -1` | `(rear+1)%capacity == front` | Wastes one slot; max = `capacity−1` |
-| 3 — Boolean Flag | Set `isFull` on every enqueue/dequeue | `!isFull && front==rear+1` | `isFull` flag | Extra state to maintain correctly |
+| Option                 | Mechanism                             | isEmpty Condition          | isFull Condition             | Trade-off                           |
+|------------------------|---------------------------------------|----------------------------|------------------------------|-------------------------------------|
+| 1 — Size Counter       | Maintain integer size                 | `size == 0`                | `size == capacity`           | ✅ Recommended — clean & clear       |
+| 2 — Sacrifice One Slot | Leave one cell unused always          | `front == -1`              | `(rear+1)%capacity == front` | Wastes one slot; max = `capacity−1` |
+| 3 — Boolean Flag       | Set `isFull` on every enqueue/dequeue | `!isFull && front==rear+1` | `isFull` flag                | Extra state to maintain correctly   |
 
 ✅ **Exam rule:** Always state which option you are using AND give its boolean condition explicitly. Option 1 (size counter) is the cleanest and most expected.
 
@@ -222,20 +234,20 @@ Visualise the array as a straight row of lockers numbered `0` to `capacity−1`.
 ### 3.6 — Linked-List Queue
 Uses `head` (front) and `tail` (rear) pointers. Each node holds data + reference to next. Never full; dynamically sized.
 
-| Operation | Behaviour |
-|-----------|-----------|
+| Operation    | Behaviour                                                                                              |
+|--------------|--------------------------------------------------------------------------------------------------------|
 | `enqueue(x)` | Create node. If empty: `head = tail = new node`. Otherwise: `tail.next = new node`; `tail = new node`. |
-| `dequeue()` | Retrieve `head.data`. Advance `head = head.next`. If `head` becomes null, set `tail = null` too. |
-| `peek()` | Return `head.data`. Nothing else. |
-| `isFull()` | Always returns false — memory is the only limit. |
+| `dequeue()`  | Retrieve `head.data`. Advance `head = head.next`. If `head` becomes null, set `tail = null` too.       |
+| `peek()`     | Return `head.data`. Nothing else.                                                                      |
+| `isFull()`   | Always returns false — memory is the only limit.                                                       |
 
 ### 3.7 — Implementation Efficiency Comparison
-| Implementation | Enqueue | Dequeue | Space Utilisation | Dynamic? |
-|---------------|---------|---------|------------------|----------|
-| Linear — with shifting | `O(1)` | `O(n)` | Full but time-costly | No |
-| Linear — pointer only | `O(1)` | `O(1)` | Front cells permanently lost | No |
-| Circular — modulo | `O(1)` | `O(1)` | ✅ Fully utilised | No (fixed) |
-| Linked List | `O(1)` | `O(1)` | Dynamic — grows on demand | Yes |
+| Implementation         | Enqueue | Dequeue | Space Utilisation            | Dynamic?   |
+|------------------------|---------|---------|------------------------------|------------|
+| Linear — with shifting | `O(1)`  | `O(n)`  | Full but time-costly         | No         |
+| Linear — pointer only  | `O(1)`  | `O(1)`  | Front cells permanently lost | No         |
+| Circular — modulo      | `O(1)`  | `O(1)`  | ✅ Fully utilised             | No (fixed) |
+| Linked List            | `O(1)`  | `O(1)`  | Dynamic — grows on demand    | Yes        |
 
 🧠 **Key insight:** Circular queue wins on space utilisation. Linked list wins on dynamic sizing. Both are `O(1)` for all core operations.
 
@@ -245,13 +257,13 @@ Uses `head` (front) and `tail` (rear) pointers. Each node holds data + reference
 *(Now that we understand linear structures and efficiency measurement, we examine the two fundamental algorithmic control flows)*
 
 ### 4.1 — The Full Comparison
-| Aspect | Recursive | Iterative | Winner |
-|--------|-----------|-----------|--------|
-| Memory (Space) | `O(n)` — call stack grows | `O(1)` — fixed variables | ✅ Iterative |
-| Stack overflow risk | Yes — for large n | None | ✅ Iterative |
-| Function-call overhead | Yes — frame creation, param passing, return address | None — direct loop | ✅ Iterative |
-| Readability | Elegant, mathematical — mirrors the definition | More verbose | Recursive |
-| When to prefer | Trees, graphs, divide-and-conquer problems | Linear computations, production systems | Context-dependent |
+| Aspect                 | Recursive                                           | Iterative                               | Winner            |
+|------------------------|-----------------------------------------------------|-----------------------------------------|-------------------|
+| Memory (Space)         | `O(n)` — call stack grows                           | `O(1)` — fixed variables                | ✅ Iterative       |
+| Stack overflow risk    | Yes — for large n                                   | None                                    | ✅ Iterative       |
+| Function-call overhead | Yes — frame creation, param passing, return address | None — direct loop                      | ✅ Iterative       |
+| Readability            | Elegant, mathematical — mirrors the definition      | More verbose                            | Recursive         |
+| When to prefer         | Trees, graphs, divide-and-conquer problems          | Linear computations, production systems | Context-dependent |
 
 ### 4.2 — Factorial: Recursive
 **Definition:** `factorial(n) = 1` if `n ≤ 1`; `factorial(n) = n × factorial(n−1)` if `n > 1`
@@ -280,15 +292,16 @@ Uses `head` (front) and `tail` (rear) pointers. Each node holds data + reference
 
 ### 4.3 — Factorial: Iterative
 **Trace — n = 5:**
-| Step | i | result = result × i | Value |
-|------|---|---------------------|-------|
-| Init | — | `result = 1` (start at 1, NOT 0) | 1 |
-| 1 | 1 | `1 × 1` | 1 |
-| 2 | 2 | `1 × 2` | 2 |
-| 3 | 3 | `2 × 3` | 6 |
-| 4 | 4 | `6 × 4` | 24 |
-| 5 | 5 | `24 × 5` | 120 ✓ |
-| Exit | 6 | `i > n → loop terminates` | return 120 |
+
+| Step | i | result = result × i              | Value      |
+|------|---|----------------------------------|------------|
+| Init | — | `result = 1` (start at 1, NOT 0) | 1          |
+| 1    | 1 | `1 × 1`                          | 1          |
+| 2    | 2 | `1 × 2`                          | 2          |
+| 3    | 3 | `2 × 3`                          | 6          |
+| 4    | 4 | `6 × 4`                          | 24         |
+| 5    | 5 | `24 × 5`                         | 120 ✓      |
+| Exit | 6 | `i > n → loop terminates`        | return 120 |
 
 | Time | `O(n)` |
 | Space | `O(1)` |
@@ -297,22 +310,23 @@ Uses `head` (front) and `tail` (rear) pointers. Each node holds data + reference
 
 ### 4.4 — The 6-Point Answer (Guarantees Full Marks)
 Any question comparing recursive vs iterative complexity must cover all six points:
-| # | Point | One Sentence |
-|---|-------|--------------|
-| 1 | Recursive Time = `O(n)` | `n` recursive calls are made, each doing `O(1)` work |
-| 2 | Recursive Space = `O(n)` | Call stack holds `n` frames simultaneously at peak depth |
-| 3 | Iterative Time = `O(n)` | Loop runs `n` iterations, one multiplication each |
-| 4 | Iterative Space = `O(1)` | Only a constant number of variables used regardless of `n` |
-| 5 | Which is more space-efficient? | Iterative — by a factor of `n` |
-| 6 | Why space matters? | Recursive version risks `StackOverflowError` for large `n`; iterative does not |
+
+| # | Point                          | One Sentence                                                                   |
+|---|--------------------------------|--------------------------------------------------------------------------------|
+| 1 | Recursive Time = `O(n)`        | `n` recursive calls are made, each doing `O(1)` work                           |
+| 2 | Recursive Space = `O(n)`       | Call stack holds `n` frames simultaneously at peak depth                       |
+| 3 | Iterative Time = `O(n)`        | Loop runs `n` iterations, one multiplication each                              |
+| 4 | Iterative Space = `O(1)`       | Only a constant number of variables used regardless of `n`                     |
+| 5 | Which is more space-efficient? | Iterative — by a factor of `n`                                                 |
+| 6 | Why space matters?             | Recursive version risks `StackOverflowError` for large `n`; iterative does not |
 
 ### 4.5 — Fibonacci: Why It Matters More Than Factorial
-| Concept Tested | Recursive (Naive) | Iterative | DP (Memoised/Tabulation) |
-|---------------|------------------|-----------|-------------------------|
-| Time Complexity | `O(2ⁿ)` — exponential | `O(n)` | `O(n)` |
-| Space Complexity | `O(n)` — call stack depth | `O(1)` — two variables | `O(n)` memo / `O(1)` tabulation |
-| Why it's slow (naive) | Each call spawns two calls → complete binary tree of depth n; `fib(3)` computed multiple times | No overlapping subproblems — each value computed once | Cache prevents recomputation |
-| Stack overflow? | Yes — for large n | No | No |
+| Concept Tested        | Recursive (Naive)                                                                              | Iterative                                             | DP (Memoised/Tabulation)        |
+|-----------------------|------------------------------------------------------------------------------------------------|-------------------------------------------------------|---------------------------------|
+| Time Complexity       | `O(2ⁿ)` — exponential                                                                          | `O(n)`                                                | `O(n)`                          |
+| Space Complexity      | `O(n)` — call stack depth                                                                      | `O(1)` — two variables                                | `O(n)` memo / `O(1)` tabulation |
+| Why it's slow (naive) | Each call spawns two calls → complete binary tree of depth n; `fib(3)` computed multiple times | No overlapping subproblems — each value computed once | Cache prevents recomputation    |
+| Stack overflow?       | Yes — for large n                                                                              | No                                                    | No                              |
 
 ✨ **Recursion Tree Visual for fib(4)**
 ```
@@ -334,29 +348,30 @@ fib(1) fib(0)
 *(The synthesis: Combining arrays, recursion, Big-O analysis, and structural trade-offs)*
 
 ### 5.1 — Core Concepts
-| Property | Meaning | Exam Importance |
-|----------|---------|----------------|
-| Time Complexity | Best/average/worst — scalability with `n` | Always state all three cases |
-| Space Complexity | In-place `O(1)` vs `O(n)` auxiliary | QuickSort uses `O(log n)` stack — not `O(1)` |
-| Stability | Preserves relative order of equal-key elements | Merge is stable; Quick/Heap are NOT |
-| Adaptivity | Performs better on nearly sorted input | Only Insertion Sort is strongly adaptive |
-| In-place | Sorts using `O(1)` extra memory (excluding recursion stack) | All sorts except MergeSort and non-comparison sorts |
-| Partitioning | Divide-and-conquer: split into sub-problems, solve, combine | QuickSort, MergeSort, Bucket Sort |
+| Property         | Meaning                                                     | Exam Importance                                     |
+|------------------|-------------------------------------------------------------|-----------------------------------------------------|
+| Time Complexity  | Best/average/worst — scalability with `n`                   | Always state all three cases                        |
+| Space Complexity | In-place `O(1)` vs `O(n)` auxiliary                         | QuickSort uses `O(log n)` stack — not `O(1)`        |
+| Stability        | Preserves relative order of equal-key elements              | Merge is stable; Quick/Heap are NOT                 |
+| Adaptivity       | Performs better on nearly sorted input                      | Only Insertion Sort is strongly adaptive            |
+| In-place         | Sorts using `O(1)` extra memory (excluding recursion stack) | All sorts except MergeSort and non-comparison sorts |
+| Partitioning     | Divide-and-conquer: split into sub-problems, solve, combine | QuickSort, MergeSort, Bucket Sort                   |
 
 ✨ **In-place vs Out-of-place Quick Reference**
-| Algorithm | In-place? | Why? |
-|-----------|-----------|--------|
-| Bubble, Selection, Insertion, Quick, Heap | ✅ Yes | Only uses input array + O(1) variables |
-| Merge Sort | ❌ No | Requires auxiliary array of size `n` for merging |
-| Counting/Radix/Bucket | ❌ No | Requires extra arrays for counts/buckets |
+
+| Algorithm                                 | In-place? | Why?                                             |
+|-------------------------------------------|-----------|--------------------------------------------------|
+| Bubble, Selection, Insertion, Quick, Heap | ✅ Yes     | Only uses input array + O(1) variables           |
+| Merge Sort                                | ❌ No      | Requires auxiliary array of size `n` for merging |
+| Counting/Radix/Bucket                     | ❌ No      | Requires extra arrays for counts/buckets         |
 
 ### 5.2 — Quadratic Sorts (`O(n²)`)
-| Algorithm | Mechanism | Best | Avg | Worst | Stable | Adaptive | When to use |
-|-----------|-----------|------|-----|-------|--------|----------|-------------|
-| Bubble Sort | Compare adjacent pairs; swap if out of order; largest bubbles to end each pass | `O(n)` | `O(n²)` | `O(n²)` | Yes | Weak (early exit) | Educational only |
-| Shaker (Cocktail) | Bidirectional Bubble — one pass left-to-right, then right-to-left | `O(n)` | `O(n²)` | `O(n²)` | Yes | Weak | Slightly faster when small values at end |
-| Selection Sort | Find minimum, swap to front; always n-1 swaps; never adaptive | `O(n²)` | `O(n²)` | `O(n²)` | No | No | When swap cost is very high |
-| Insertion Sort | Build sorted prefix; shift elements right to insert each new key | `O(n)` | `O(n²)` | `O(n²)` | Yes | YES — strong | Small data or nearly sorted |
+| Algorithm         | Mechanism                                                                      | Best    | Avg     | Worst   | Stable | Adaptive          | When to use                              |
+|-------------------|--------------------------------------------------------------------------------|---------|---------|---------|--------|-------------------|------------------------------------------|
+| Bubble Sort       | Compare adjacent pairs; swap if out of order; largest bubbles to end each pass | `O(n)`  | `O(n²)` | `O(n²)` | Yes    | Weak (early exit) | Educational only                         |
+| Shaker (Cocktail) | Bidirectional Bubble — one pass left-to-right, then right-to-left              | `O(n)`  | `O(n²)` | `O(n²)` | Yes    | Weak              | Slightly faster when small values at end |
+| Selection Sort    | Find minimum, swap to front; always n-1 swaps; never adaptive                  | `O(n²)` | `O(n²)` | `O(n²)` | No     | No                | When swap cost is very high              |
+| Insertion Sort    | Build sorted prefix; shift elements right to insert each new key               | `O(n)`  | `O(n²)` | `O(n²)` | Yes    | YES — strong      | Small data or nearly sorted              |
 
 🔍 **Exam head-to-head:** All `O(n²)` worst, but **Insertion Sort** is preferred for nearly sorted data (adaptive + stable). Selection Sort wins only when minimising swaps matters. Bubble/Shaker are rarely used beyond education.
 
@@ -385,14 +400,15 @@ i=3, key=2:  [3,3,5,8] → [2,3,3,5] → insert 2 → [2,3,5,8] ✓
 
 ### 5.3 — Shell Sort (Bridge Algorithm)
 Generalised Insertion Sort with a gap sequence. Sorts elements far apart first, progressively reducing the gap to 1 (when it becomes standard insertion sort).
-| Aspect | Detail |
-|--------|--------|
-| Mechanism | Insert with gap `g`; reduce `g` (e.g., `n/2→n/4→...→1`); final pass `gap=1` is nearly sorted |
-| Best | `O(n log n)` with good gap sequence (e.g., Knuth: `(3^k−1)/2`) |
-| Average | `O(n^(3/2))` or `O(n log² n)` depending on gap choice |
-| Worst | `O(n²)` with poor gaps (e.g., Shell's original) |
-| Space / Stable | `O(1)` in-place. Not stable. |
-| Use case | Medium datasets; historically important bridge toward `O(n log n)` methods |
+
+| Aspect         | Detail                                                                                       |
+|----------------|----------------------------------------------------------------------------------------------|
+| Mechanism      | Insert with gap `g`; reduce `g` (e.g., `n/2→n/4→...→1`); final pass `gap=1` is nearly sorted |
+| Best           | `O(n log n)` with good gap sequence (e.g., Knuth: `(3^k−1)/2`)                               |
+| Average        | `O(n^(3/2))` or `O(n log² n)` depending on gap choice                                        |
+| Worst          | `O(n²)` with poor gaps (e.g., Shell's original)                                              |
+| Space / Stable | `O(1)` in-place. Not stable.                                                                 |
+| Use case       | Medium datasets; historically important bridge toward `O(n log n)` methods                   |
 
 ### 5.4 — The Big Three `O(n log n)` Sorts
 
@@ -422,6 +438,7 @@ Merge Phase:
 | Best `Θ(n log n)` | Average `Θ(n log n)` | Worst `Θ(n log n)` | Space `O(n)` | Stable? YES |
 
 **QuickSort**
+
 - Mechanism: Choose pivot → partition (elements ≤ pivot left, ≥ pivot right) → recurse on both halves
 - Pivot strategies: Last element (risky), random pivot (safe), median-of-three (balanced)
 - Worst case trigger: Already sorted or reverse-sorted array with first/last pivot
@@ -432,6 +449,7 @@ Merge Phase:
 | Best `Θ(n log n)` | Average `Θ(n log n)` | Worst `O(n²)` | Space `O(log n)` | Stable? NO |
 
 **HeapSort**
+
 - Mechanism: Phase 1 — Build max-heap (start from last non-leaf: index `n/2−1`, work backwards). Phase 2 — Swap root (max) with last element, shrink heap, heapify from root. Repeat n times.
 - ALWAYS `Θ(n log n)` — no bad input can cause degradation
 - In-place: Yes — `O(1)` extra space. No auxiliary array.
@@ -441,21 +459,22 @@ Merge Phase:
 | Best `Θ(n log n)` | Average `Θ(n log n)` | Worst `Θ(n log n)` | Space `O(1)` | Stable? NO |
 
 **Head-to-Head: The Big Three (Exam Gold)**
-| Comparison | Preferred Choice | Key Reason |
-|------------|----------------|------------|
-| Merge vs Heap | Merge (stability + cache); Heap (space) | Merge: stable, cache-friendly. Heap: in-place, guaranteed |
-| Quick vs Heap | Quick (average speed); Heap (worst-case safety) | Quick ≈ `1.39n log n` avg; Heap never degrades to `O(n²)` |
-| Merge vs Quick | Merge (stability + guarantee); Quick (speed + space) | Merge: stable, guaranteed `O(n log n)`. Quick: in-place, faster avg |
-| All three vs Bubble | Any of the three | Bubble/Insertion: `O(n²)` worst — unacceptable for large n |
+
+| Comparison          | Preferred Choice                                     | Key Reason                                                          |
+|---------------------|------------------------------------------------------|---------------------------------------------------------------------|
+| Merge vs Heap       | Merge (stability + cache); Heap (space)              | Merge: stable, cache-friendly. Heap: in-place, guaranteed           |
+| Quick vs Heap       | Quick (average speed); Heap (worst-case safety)      | Quick ≈ `1.39n log n` avg; Heap never degrades to `O(n²)`           |
+| Merge vs Quick      | Merge (stability + guarantee); Quick (speed + space) | Merge: stable, guaranteed `O(n log n)`. Quick: in-place, faster avg |
+| All three vs Bubble | Any of the three                                     | Bubble/Insertion: `O(n²)` worst — unacceptable for large n          |
 
 ### 5.5 — Non-Comparison Sorts (Linear Under Conditions)
 🧠 **Why they beat `Ω(n log n)`:** The comparison-sorting lower bound only applies when the only information extracted per step is one comparison result. Non-comparison sorts extract more information per operation (key indexing, digit extraction) — they bypass the limit entirely.
 
-| Sort | Mechanism | Time | Space | Stable | Key Requirement |
-|------|-----------|------|-------|--------|----------------|
-| Counting Sort | Count occurrences; compute prefix sums; place elements | `O(n+k)` | `O(n+k)` | Yes | Integer keys in range `[0, k)` |
-| Radix Sort | Sort digit by digit (LSD→MSD) using stable sub-sort | `O(d·(n+k))` | `O(n+k)` | Yes | Fixed-width digit keys; base `b` |
-| Bucket Sort | Scatter into buckets; sort each bucket; concatenate | `O(n)` avg / `O(n²)` worst | `O(n)` | Depends | Uniform distribution assumed |
+| Sort          | Mechanism                                              | Time                       | Space    | Stable  | Key Requirement                  |
+|---------------|--------------------------------------------------------|----------------------------|----------|---------|----------------------------------|
+| Counting Sort | Count occurrences; compute prefix sums; place elements | `O(n+k)`                   | `O(n+k)` | Yes     | Integer keys in range `[0, k)`   |
+| Radix Sort    | Sort digit by digit (LSD→MSD) using stable sub-sort    | `O(d·(n+k))`               | `O(n+k)` | Yes     | Fixed-width digit keys; base `b` |
+| Bucket Sort   | Scatter into buckets; sort each bucket; concatenate    | `O(n)` avg / `O(n²)` worst | `O(n)`   | Depends | Uniform distribution assumed     |
 
 ✨ **Why O(n log n) is the "Sorting Barrier"**  
 **The Comparison-Sorting Lower Bound:** No comparison-based sorting algorithm can beat `Ω(n log n)` in the worst case.  
@@ -466,39 +485,39 @@ Merge Phase:
 🧠 **Exam application:** If asked "Can we sort faster than O(n log n)?", answer: "Only if we use non-comparison sorts like Counting/Radix/Bucket, which require integer keys, fixed-width digits, or uniform distribution respectively."
 
 ### 5.6 — Master Complexity Table (2025 Exam Reference)
-| Algorithm | Best | Average | Worst | Space | Stable | In-place |
-|-----------|------|---------|-------|-------|--------|----------|
-| Bubble Sort | `O(n)` | `O(n²)` | `O(n²)` | `O(1)` | Yes | Yes |
-| Shaker Sort | `O(n)` | `O(n²)` | `O(n²)` | `O(1)` | Yes | Yes |
-| Selection Sort | `O(n²)` | `O(n²)` | `O(n²)` | `O(1)` | No | Yes |
-| Insertion Sort | `O(n)` | `O(n²)` | `O(n²)` | `O(1)` | Yes | Yes |
-| Shell Sort | `O(n log n)` | `O(n^(3/2))` | `O(n²)` | `O(1)` | No | Yes |
-| Merge Sort | `O(n log n)` | `O(n log n)` | `O(n log n)` | `O(n)` | Yes | No |
-| Quick Sort | `O(n log n)` | `O(n log n)` | `O(n²)` ⚠️ | `O(log n)` | No | Yes |
-| Heap Sort | `O(n log n)` | `O(n log n)` | `O(n log n)` | `O(1)` | No | Yes |
-| Counting Sort | `O(n+k)` | `O(n+k)` | `O(n+k)` | `O(n+k)` | Yes | No |
-| Radix Sort | `O(d(n+k))` | `O(d(n+k))` | `O(d(n+k))` | `O(n+k)` | Yes | No |
-| Bucket Sort | `O(n)` | `O(n)` | `O(n²)` | `O(n)` | Usually | No |
+| Algorithm      | Best         | Average      | Worst        | Space      | Stable  | In-place |
+|----------------|--------------|--------------|--------------|------------|---------|----------|
+| Bubble Sort    | `O(n)`       | `O(n²)`      | `O(n²)`      | `O(1)`     | Yes     | Yes      |
+| Shaker Sort    | `O(n)`       | `O(n²)`      | `O(n²)`      | `O(1)`     | Yes     | Yes      |
+| Selection Sort | `O(n²)`      | `O(n²)`      | `O(n²)`      | `O(1)`     | No      | Yes      |
+| Insertion Sort | `O(n)`       | `O(n²)`      | `O(n²)`      | `O(1)`     | Yes     | Yes      |
+| Shell Sort     | `O(n log n)` | `O(n^(3/2))` | `O(n²)`      | `O(1)`     | No      | Yes      |
+| Merge Sort     | `O(n log n)` | `O(n log n)` | `O(n log n)` | `O(n)`     | Yes     | No       |
+| Quick Sort     | `O(n log n)` | `O(n log n)` | `O(n²)` ⚠️   | `O(log n)` | No      | Yes      |
+| Heap Sort      | `O(n log n)` | `O(n log n)` | `O(n log n)` | `O(1)`     | No      | Yes      |
+| Counting Sort  | `O(n+k)`     | `O(n+k)`     | `O(n+k)`     | `O(n+k)`   | Yes     | No       |
+| Radix Sort     | `O(d(n+k))`  | `O(d(n+k))`  | `O(d(n+k))`  | `O(n+k)`   | Yes     | No       |
+| Bucket Sort    | `O(n)`       | `O(n)`       | `O(n²)`      | `O(n)`     | Usually | No       |
 
 ### 5.7 — Decision Matrix: When to Use Which Sort
-| Requirement | Best Choice | Why |
-|-------------|-------------|-------|
-| Small / nearly sorted data | Insertion Sort | Adaptive `O(n)` on nearly sorted; stable |
-| Medium data, simple improvement | Shell Sort | Better than quadratic, simpler than `O(n log n)` sorts |
-| Must be stable | Merge Sort | Only stable `O(n log n)` sort |
-| In-place + worst-case guarantee | Heap Sort | Always `O(n log n)`; only `O(1)` space with no worst-case risk |
-| Fastest average + in-place | Quick Sort (random pivot) | Cache-friendly; ~`1.39n log n` expected |
-| Integer keys, limited range | Counting / Radix Sort | Linear time when constraints met |
-| Uniform distribution | Bucket Sort | Linear average time |
+| Requirement                     | Best Choice               | Why                                                            |
+|---------------------------------|---------------------------|----------------------------------------------------------------|
+| Small / nearly sorted data      | Insertion Sort            | Adaptive `O(n)` on nearly sorted; stable                       |
+| Medium data, simple improvement | Shell Sort                | Better than quadratic, simpler than `O(n log n)` sorts         |
+| Must be stable                  | Merge Sort                | Only stable `O(n log n)` sort                                  |
+| In-place + worst-case guarantee | Heap Sort                 | Always `O(n log n)`; only `O(1)` space with no worst-case risk |
+| Fastest average + in-place      | Quick Sort (random pivot) | Cache-friendly; ~`1.39n log n` expected                        |
+| Integer keys, limited range     | Counting / Radix Sort     | Linear time when constraints met                               |
+| Uniform distribution            | Bucket Sort               | Linear average time                                            |
 
 ### 5.8 — Sorting Exam Traps
-| Trap | Correct Statement |
-|------|-----------------|
-| QuickSort uses `O(1)` space | Wrong — it uses `O(log n)` average stack space for recursion |
-| HeapSort is stable | Wrong — HeapSort is NOT stable. For stable `O(n log n)`, use MergeSort |
-| Forgetting to state pivot assumption | Always write: `'Assuming random pivot for QuickSort...'` |
-| Not showing array after each pass | Trace questions want array state after EVERY pass/partition/extraction |
-| Confusing best/avg/worst | Always state all three for any sort; they differ for QuickSort and Shell |
+| Trap                                 | Correct Statement                                                        |
+|--------------------------------------|--------------------------------------------------------------------------|
+| QuickSort uses `O(1)` space          | Wrong — it uses `O(log n)` average stack space for recursion             |
+| HeapSort is stable                   | Wrong — HeapSort is NOT stable. For stable `O(n log n)`, use MergeSort   |
+| Forgetting to state pivot assumption | Always write: `'Assuming random pivot for QuickSort...'`                 |
+| Not showing array after each pass    | Trace questions want array state after EVERY pass/partition/extraction   |
+| Confusing best/avg/worst             | Always state all three for any sort; they differ for QuickSort and Shell |
 
 ---
 
@@ -506,47 +525,47 @@ Merge Phase:
 *(Final review: Strategy, rapid recall, and cross-referencing the build-up)*
 
 ### 6.1 — Closed-Book Exam Strategies
-| # | Strategy | Why It Wins Marks |
-|---|----------|----------------|
-| 1 | Always write the base case for any recursion | Missing base case = incomplete answer |
-| 2 | Draw call stack for recursive traces — show BOTH winding AND unwinding | Unwinding phase is where marks live |
-| 3 | Trace sorting with a table — show array state after every pass/partition | Examiners check each step, not just final result |
-| 4 | Justify complexity with reasoning, not just the symbol | `'O(n²) because two nested loops each running n times' > 'O(n²)'` |
-| 5 | State assumptions | `'Assuming random pivot...'` or `'Assuming nearly sorted input...'` |
-| 6 | For sorting compare questions: use a table (Time, Space, Stable, In-place, Cache, Worst guarantee) | Structured comparison earns all comparison marks |
-| 7 | Link to real-world use | Queue = print spooler; Heap = priority queue; Merge = external sort |
+| # | Strategy                                                                                           | Why It Wins Marks                                                   |
+|---|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| 1 | Always write the base case for any recursion                                                       | Missing base case = incomplete answer                               |
+| 2 | Draw call stack for recursive traces — show BOTH winding AND unwinding                             | Unwinding phase is where marks live                                 |
+| 3 | Trace sorting with a table — show array state after every pass/partition                           | Examiners check each step, not just final result                    |
+| 4 | Justify complexity with reasoning, not just the symbol                                             | `'O(n²) because two nested loops each running n times' > 'O(n²)'`   |
+| 5 | State assumptions                                                                                  | `'Assuming random pivot...'` or `'Assuming nearly sorted input...'` |
+| 6 | For sorting compare questions: use a table (Time, Space, Stable, In-place, Cache, Worst guarantee) | Structured comparison earns all comparison marks                    |
+| 7 | Link to real-world use                                                                             | Queue = print spooler; Heap = priority queue; Merge = external sort |
 
 ### 6.2 — Must-Know One-Liners (Closed Book Memory Anchors)
-| Concept | One-Liner |
-|---------|-----------|
-| Queue | FIFO linear ADT — enqueue at rear, dequeue from front; circular array reuses space via `(index+1)%capacity` |
-| Stack | LIFO linear ADT — push and pop at the same end (top) |
-| ADT | Specifies WHAT operations a structure supports — not HOW it is built |
-| Big-O loops | Sequential = ADD. Nested = MULTIPLY. Multiplicative step = `O(log n)`. |
-| Recursion | Call stack grows with depth. Always need a base case. Space = max depth. |
-| Factorial | Recursive: `O(n)` time, `O(n)` space (hidden call stack). Iterative: `O(n)` time, `O(1)` space. |
-| Fibonacci | Naive: `O(2ⁿ)`. DP/Iterative: `O(n)`. Overlapping subproblems = exponential blow-up without caching. |
-| QuickSort | Pivot + partition. Average `O(n log n)`. Worst `O(n²)` (bad pivot). In-place, unstable. |
-| HeapSort | Build max-heap + extract. ALWAYS `O(n log n)`. In-place, unstable, cache-poor. |
-| MergeSort | Divide + merge. ALWAYS `O(n log n)`. Stable. Requires `O(n)` extra space. |
-| Stability | Stable: Bubble, Shaker, Insertion, Merge. Unstable: Selection, Shell, Quick, Heap. |
-| In-place | All sorts except MergeSort and non-comparison sorts use `O(1)` extra (QuickSort stack is `O(log n)`). |
-| Lower bound | No comparison sort can beat `Ω(n log n)` worst-case. Counting/Radix/Bucket bypass this via key structure. |
+| Concept     | One-Liner                                                                                                   |
+|-------------|-------------------------------------------------------------------------------------------------------------|
+| Queue       | FIFO linear ADT — enqueue at rear, dequeue from front; circular array reuses space via `(index+1)%capacity` |
+| Stack       | LIFO linear ADT — push and pop at the same end (top)                                                        |
+| ADT         | Specifies WHAT operations a structure supports — not HOW it is built                                        |
+| Big-O loops | Sequential = ADD. Nested = MULTIPLY. Multiplicative step = `O(log n)`.                                      |
+| Recursion   | Call stack grows with depth. Always need a base case. Space = max depth.                                    |
+| Factorial   | Recursive: `O(n)` time, `O(n)` space (hidden call stack). Iterative: `O(n)` time, `O(1)` space.             |
+| Fibonacci   | Naive: `O(2ⁿ)`. DP/Iterative: `O(n)`. Overlapping subproblems = exponential blow-up without caching.        |
+| QuickSort   | Pivot + partition. Average `O(n log n)`. Worst `O(n²)` (bad pivot). In-place, unstable.                     |
+| HeapSort    | Build max-heap + extract. ALWAYS `O(n log n)`. In-place, unstable, cache-poor.                              |
+| MergeSort   | Divide + merge. ALWAYS `O(n log n)`. Stable. Requires `O(n)` extra space.                                   |
+| Stability   | Stable: Bubble, Shaker, Insertion, Merge. Unstable: Selection, Shell, Quick, Heap.                          |
+| In-place    | All sorts except MergeSort and non-comparison sorts use `O(1)` extra (QuickSort stack is `O(log n)`).       |
+| Lower bound | No comparison sort can beat `Ω(n log n)` worst-case. Counting/Radix/Bucket bypass this via key structure.   |
 
 ### 6.3 — Complete Coverage Index
-| Question Type | Where to Find It |
-|--------------|-----------------|
-| What is a Queue / Stack / ADT? | Chapter 2 (§2.1, §2.3) + Chapter 3 (§3.1) |
-| Why circular queue? | Chapter 3 (§3.2 — linear queue failure, §3.3 — modulo solution) |
-| How does circular queue work? | Chapter 3 (§3.3 trace, §3.4 full detection, §3.5 operations) |
-| Big-O of any code snippet? | Chapter 1 (§1.2 rules, §1.3 past exam patterns) |
-| Recursive vs iterative comparison? | Chapter 4 (§4.1 table, §4.4 six-point answer) |
-| Factorial trace? | Chapter 4 (§4.2 recursive trace, §4.3 iterative trace) |
-| Fibonacci complexity + recursion tree? | Chapter 4 (§4.5) |
-| Which sorting algorithm to choose? | Chapter 5 (§5.7 decision matrix) + Chapter 7 (§7.1 Q5) |
-| Sort trace (Bubble/Quick/Heap)? | Chapter 5 (§5.2–§5.4 mechanism descriptions) |
-| Sorting complexity comparison? | Chapter 5 (§5.6 master table, §5.4 head-to-heads) |
-| Stable vs unstable? | Chapter 5 (§5.1, §5.6) + Chapter 6 (§6.2 one-liners) |
+| Question Type                          | Where to Find It                                                |
+|----------------------------------------|-----------------------------------------------------------------|
+| What is a Queue / Stack / ADT?         | Chapter 2 (§2.1, §2.3) + Chapter 3 (§3.1)                       |
+| Why circular queue?                    | Chapter 3 (§3.2 — linear queue failure, §3.3 — modulo solution) |
+| How does circular queue work?          | Chapter 3 (§3.3 trace, §3.4 full detection, §3.5 operations)    |
+| Big-O of any code snippet?             | Chapter 1 (§1.2 rules, §1.3 past exam patterns)                 |
+| Recursive vs iterative comparison?     | Chapter 4 (§4.1 table, §4.4 six-point answer)                   |
+| Factorial trace?                       | Chapter 4 (§4.2 recursive trace, §4.3 iterative trace)          |
+| Fibonacci complexity + recursion tree? | Chapter 4 (§4.5)                                                |
+| Which sorting algorithm to choose?     | Chapter 5 (§5.7 decision matrix) + Chapter 7 (§7.1 Q5)          |
+| Sort trace (Bubble/Quick/Heap)?        | Chapter 5 (§5.2–§5.4 mechanism descriptions)                    |
+| Sorting complexity comparison?         | Chapter 5 (§5.6 master table, §5.4 head-to-heads)               |
+| Stable vs unstable?                    | Chapter 5 (§5.1, §5.6) + Chapter 6 (§6.2 one-liners)            |
 
 ---
 
@@ -579,7 +598,7 @@ for (int k = 0; k < n; k++) {
 ```
 
 ✅ **Model Answer Structure:**
-
+```
 Fragment A:
 - Outer loop: i runs 0 to n-1 → O(n)
 - Inner loop: j starts at 0, multiplies by 2 each iteration → O(log n)
@@ -591,7 +610,7 @@ Fragment B:
 - Sequential → ADD: O(log n) + O(n) = O(n) [drop lower-order term]
 
 Final: Fragment A = O(n log n), Fragment B = O(n)
-
+```
 🔍 **What examiner tests:** Ability to distinguish sequential (ADD) vs nested (MULTIPLY) loops; recognition of logarithmic patterns; simplification rules.
 
 ---
@@ -608,7 +627,7 @@ int fact(int n) {
 ```
 
 ✅ **Model Answer Structure:**
-
+```
 TRACE for factorial(5):
 WINDING PHASE (call stack builds):
 fact(5) → calls fact(4) [depth 1]
@@ -628,7 +647,7 @@ COMPLEXITY COMPARISON:
 - Time: Both O(n) — n operations total
 - Space: Recursive O(n) [call stack depth], Iterative O(1) [fixed variables]
 - Conclusion: Iterative is preferable for large n due to no stack overflow risk
-
+```
 🔍 **What examiner tests:** Understanding of call stack mechanics; ability to show BOTH winding and unwinding; space vs time distinction.
 
 ---
@@ -712,6 +731,7 @@ public class CircularQueue {
 ```
 
 🧠 **Key points to mention:**
+
 - Use `size` counter to avoid ambiguity between empty/full states
 - Modulo operator `%` enables circular wrap-around
 - `peek()` must NOT modify `front` — common exam trap
@@ -723,22 +743,39 @@ public class CircularQueue {
 
 #### 🔹 QUESTION 5: Algorithm Selection & Justification
 **Typical prompt:**  
+
 *"You need to sort a large list of 1 million records. Which sorting algorithm would you choose and why? Discuss time and space complexity, stability, and worst-case behavior."*
 
 ✅ **Model Answer Structure:**
 
 REQUIREMENTS ANALYSIS:
+
 - Large dataset (n = 1,000,000) → need O(n log n) algorithm
 - Stability? If sorting by multiple keys (e.g., name then grade), stability matters
 - Memory constraints? If limited, prefer in-place algorithms
 - Worst-case tolerance? If critical, avoid algorithms with O(n²) worst case
 
 ALGORITHM COMPARISON:
-| Algorithm | Time (Avg/Worst) | Space | Stable? | In-place? | Suitability |
-|-----------|-----------------|-------|---------|-----------|-------------|
-| QuickSort | O(n log n) / O(n²) | O(log n) | No | Yes | ⚠️ Risk of O(n²) on sorted data |
-| MergeSort | O(n log n) / O(n log n) | O(n) | Yes | No | ✅ Stable, guaranteed, but needs memory |
-| HeapSort  | O(n log n) / O(n log n) | O(1) | No | Yes | ✅ Guaranteed + in-place, but slower constant 
+
+| Algorithm | Time (Avg/Worst)        | Space    | Stable? | In-place? | Suitability                                  |
+|-----------|-------------------------|----------|---------|-----------|----------------------------------------------|
+| QuickSort | O(n log n) / O(n²)      | O(log n) | No      | Yes       | ⚠️ Risk of O(n²) on sorted data              |
+| MergeSort | O(n log n) / O(n log n) | O(n)     | Yes     | No        | ✅ Stable, guaranteed, but needs memory       |
+| HeapSort  | O(n log n) / O(n log n) | O(1)     | No      | Yes       | ✅ Guaranteed + in-place, but slower constant |
+
+## 📊 Subject Guide Coverage Summary
+
+| Chapter                  | Subject Guide SO            | Purpose                  | Key Files                                | Status         |
+|--------------------------|-----------------------------|--------------------------|------------------------------------------|----------------|
+| `01-BigO-Loop-Analysis`  | SO1: Big O Notation         | Loop pattern recognition | `LoopPatterns.java`                      | ✅ Complete     |
+| `02-Foundations-ADTs`    | SO5-SO6: Data Structures    | ADT vs implementation    | `QueueCircular.java`                     | ✅ Complete     |
+| `03-Queue-Theory`        | SO5-SO6: Data Structures    | Linear → Circular queue  | `QueueLinear.java`, `QueueCircular.java` | ✅ Complete     |
+| `04-Recursion-Iteration` | SO2: Recursion vs Iteration | Control flow comparison  | `FactorialRecursive.java`                | 🔄 In Progress |
+| `05-Sorting-Algorithms`  | SO4: Sorting Algorithms     | All major sorts          | `MergeSort.java`, `QuickSort.java`       | 🔄 In Progress |
+| `06-Exam-Practice`       | SO7: Application Exercises  | Mock questions           | `Q4_CircularQueueTest.java`              | 🔄 In Progress |
+| `adp470s-common`         | Cross-cutting               | Shared utilities         | `SortTester.java`                        | ✅ Complete     |
+
+> ⚠️ **SO3 Gap**: Search Algorithms (Linear/Binary) not yet implemented — see [Issue #1](link)
 
 > 🤖 **GenAI note:** This project was built with the help of generative AI.  
 > Human: design, testing, accountability. AI: brainstorming, code drafts, review.  
