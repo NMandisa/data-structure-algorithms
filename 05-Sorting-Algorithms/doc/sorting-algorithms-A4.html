@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>🧠 Sorting Algorithms — Make It Stick</title>
+    <style>
+        @page {
+          size: A4;
+          margin: 10mm 12mm;
+        }
+        @media print {
+          body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          .page-break { page-break-before: always; }
+          a { text-decoration: none; color: inherit; }
+        }
+        * { box-sizing: border-box; }
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+          font-size: 10pt;
+          line-height: 1.3;
+          color: #1a1a1a;
+          background: #fff;
+          margin: 0;
+          padding: 0;
+        }
+        .sheet {
+          width: 210mm;
+          min-height: 297mm;
+          padding: 10mm 12mm;
+          margin: 0 auto;
+          background: white;
+        }
+        h1 {
+          font-size: 15pt;
+          margin: 0 0 4pt 0;
+          padding-bottom: 5pt;
+          border-bottom: 2pt solid #2563eb;
+          color: #1e40af;
+        }
+        .subtitle {
+          font-size: 8.5pt;
+          color: #64748b;
+          margin: 0 0 10pt 0;
+          font-style: italic;
+        }
+        h2 {
+          font-size: 11pt;
+          margin: 12pt 0 5pt 0;
+          padding: 3pt 6pt;
+          background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+          border-left: 4pt solid #0ea5e9;
+          border-radius: 0 3px 3px 0;
+          color: #0c4a6e;
+        }
+        h3 {
+          font-size: 9.5pt;
+          margin: 8pt 0 3pt 0;
+          color: #1e293b;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 5pt 0;
+          font-size: 9pt;
+        }
+        th, td {
+          border: 0.75pt solid #cbd5e1;
+          padding: 4pt 5pt;
+          vertical-align: top;
+        }
+        th {
+          background: #f1f5f9;
+          font-weight: 600;
+          text-align: left;
+          color: #334155;
+        }
+        tr:nth-child(even) { background: #f8fafc; }
+        .family-badge {
+          display: inline-block;
+          padding: 1.5pt 5pt;
+          border-radius: 3px;
+          font-size: 8pt;
+          font-weight: 600;
+          margin-right: 3pt;
+        }
+        .fam1 { background: #fee2e2; color: #991b1b; }
+        .fam2 { background: #dcfce7; color: #166534; }
+        .fam3 { background: #fef3c7; color: #92400e; }
+        .check { color: #16a34a; font-weight: bold; }
+        .cross { color: #dc2626; font-weight: bold; }
+        .triangle {
+          background: #f8fafc;
+          border: 1pt solid #e2e8f0;
+          border-radius: 5px;
+          padding: 6pt;
+          margin: 6pt 0;
+          font-family: monospace;
+          font-size: 8.5pt;
+          white-space: pre;
+          line-height: 1.35;
+        }
+        .grid-2 {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8pt;
+        }
+        .box {
+          background: #f8fafc;
+          border: 1pt solid #e2e8f0;
+          border-radius: 4px;
+          padding: 5pt 6pt;
+          font-size: 8.5pt;
+        }
+        .box h4 {
+          margin: 0 0 3pt 0;
+          font-size: 9pt;
+          color: #334155;
+        }
+        .footer {
+          margin-top: 10pt;
+          padding-top: 4pt;
+          border-top: 1pt dashed #cbd5e1;
+          font-size: 7.5pt;
+          color: #64748b;
+          text-align: center;
+        }
+        .highlight {
+          background: #fef08a;
+          padding: 1pt 3pt;
+          border-radius: 2px;
+          font-weight: 500;
+        }
+        code {
+          background: #f1f5f9;
+          padding: 1pt 3pt;
+          border-radius: 2px;
+          font-family: 'SF Mono', 'Fira Code', monospace;
+          font-size: 8.5pt;
+          color: #0f172a;
+        }
+        small { font-size: 8pt; color: #64748b; }
+        ul, ol { margin: 3pt 0 3pt 14pt; padding: 0; }
+        li { margin: 1.5pt 0; }
+    </style>
+</head>
+<body>
+<div class="sheet">
+    <h1>🧠 Sorting Algorithms — Make It Stick</h1>
+    <div class="subtitle">A4 Cheat Sheet • SO4 Exam Focus • Print at 100% Scale</div>
+
+    <!-- FAMILY 1 -->
+    <h2><span class="family-badge fam1">FAMILY 1</span> The O(n²) Trio</h2>
+    <table>
+        <thead>
+        <tr>
+            <th width="22%">Algorithm</th>
+            <th width="28%">How It Works</th>
+            <th width="10%">Stable?</th>
+            <th width="12%">Adaptive?</th>
+            <th width="18%">Best Use</th>
+            <th width="20%">Memory Hook</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>🫧 <strong>Bubble</strong></td>
+            <td>Compare neighbours, swap if wrong. Biggest "bubbles" to end each pass.</td>
+            <td class="check">✅ Yes</td>
+            <td class="check">✅ Yes<br><code>O(n)</code></td>
+            <td>Educational only</td>
+            <td><em>Neighbours swap, heaviest rises.</em></td>
+        </tr>
+        <tr>
+            <td>🎯 <strong>Selection</strong></td>
+            <td>Scan unsorted, find min, swap to front. Repeat.</td>
+            <td class="cross">❌ No</td>
+            <td class="cross">❌ No</td>
+            <td>When swaps are expensive</td>
+            <td><em>Find min, put first. Always n².</em></td>
+        </tr>
+        <tr>
+            <td>🃏 <strong>Insertion</strong></td>
+            <td>Pick next card, slide left into sorted prefix.</td>
+            <td class="check">✅ Yes</td>
+            <td class="check">✅✅ Strong</td>
+            <td>Nearly sorted / small <code>n</code></td>
+            <td><em>Slide left. Hidden QuickSort booster.</em></td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="font-size:9pt; margin-top:3pt;">
+        ⚡ <strong>Head-to-Head:</strong> Nearly sorted? → <span class="highlight">Insertion</span>. Costly swaps? → <span class="highlight">Selection</span>. Else? → <span class="highlight">Insertion</span>. Bubble is rarely preferred.
+    </div>
+
+    <!-- FAMILY 2 -->
+    <h2><span class="family-badge fam2">FAMILY 2</span> The O(n log n) Big Three</h2>
+    <table>
+        <thead>
+        <tr>
+            <th width="18%">Algorithm</th>
+            <th width="28%">Mechanism</th>
+            <th width="9%">Stable?</th>
+            <th width="11%">Space</th>
+            <th width="16%">Worst Case</th>
+            <th width="18%">Why It Matters</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>🔀 <strong>Merge</strong></td>
+            <td>Divide → sort halves → merge sorted fronts</td>
+            <td class="check">✅ Yes</td>
+            <td><code>O(n)</code></td>
+            <td><code>Θ(n log n)</code></td>
+            <td>Stable guarantee. External sort friendly.</td>
+        </tr>
+        <tr>
+            <td>⚡ <strong>Quick</strong></td>
+            <td>Pivot → partition left/right → recurse</td>
+            <td class="cross">❌ No</td>
+            <td><code>O(log n)</code> stack</td>
+            <td><code>O(n²)</code> ⚠️<br><small>Trigger: sorted + bad pivot</small></td>
+            <td>Fastest in practice. Cache-friendly. Fix: random pivot.</td>
+        </tr>
+        <tr>
+            <td>🏗️ <strong>Heap</strong></td>
+            <td>Build max-heap from <code>n/2−1 → 0</code>. Swap root↔last, shrink, heapify root.</td>
+            <td class="cross">❌ No</td>
+            <td><code>O(1)</code></td>
+            <td><code>Θ(n log n)</code></td>
+            <td>Guaranteed <code>O(n log n)</code>. Truly in-place. Cache-unfriendly.</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="triangle">
+        MERGE SORT
+        ┌─────────────┐
+        │ Stable ✅   │
+        │ Guaranteed  │
+        │ Space O(n)❌│
+        └──────┬──────┘
+        │ choose by constraint
+        ┌─────────┴─────────┐
+        ▼                   ▼
+        QUICK SORT            HEAP SORT
+        ┌────────────┐        ┌────────────┐
+        │ Fastest    │        │ In-place   │
+        │ In-place   │        │ Guaranteed │
+        │ O(n²) risk │        │ Not stable │
+        └────────────┘        └────────────┘
+    </div>
+
+    <!-- EXAM HEAD-TO-HEAD -->
+    <div style="margin: 8pt 0;">
+        <h3>🎯 Exam Head-to-Head (4-Mark Questions)</h3>
+        <table>
+            <thead><tr><th width="40%">If exam asks...</th><th width="60%">Answer</th></tr></thead>
+            <tbody>
+            <tr><td>Stable <code>O(n log n)</code>?</td><td><strong>MergeSort</strong> only</td></tr>
+            <tr><td>In-place + guaranteed <code>O(n log n)</code>?</td><td><strong>HeapSort</strong> only</td></tr>
+            <tr><td>Fastest average in practice?</td><td><strong>QuickSort</strong> (cache-friendly, low constants)</td></tr>
+            <tr><td>QuickSort worst-case trigger?</td><td>Already-sorted/reverse input + first/last element pivot</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- FAMILY 3 -->
+    <h2><span class="family-badge fam3">FAMILY 3</span> The Cheaters O(n)</h2>
+    <table>
+        <thead>
+        <tr>
+            <th width="18%">Sort</th>
+            <th width="24%">How It Cheats</th>
+            <th width="14%">Time</th>
+            <th width="11%">Stable?</th>
+            <th width="23%">Requirement</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><strong>Counting</strong></td>
+            <td>Counts → prefix sum → direct index</td>
+            <td><code>O(n+k)</code></td>
+            <td class="check">✅ Yes</td>
+            <td>Integer keys <code>[0, k)</code></td>
+        </tr>
+        <tr>
+            <td><strong>Radix</strong></td>
+            <td>LSD/MSD digit passes + stable sub-sort</td>
+            <td><code>O(d·(n+k))</code></td>
+            <td class="check">✅ Yes</td>
+            <td>Fixed-width digit keys</td>
+        </tr>
+        <tr>
+            <td><strong>Bucket</strong></td>
+            <td>Scatter → sort buckets → concat</td>
+            <td><code>O(n)</code> avg</td>
+            <td><span style="color:#d97706">⚠️ Depends</span></td>
+            <td>Uniform distribution</td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="font-size:9pt; margin-top:3pt;">
+        🔑 <strong>Pattern:</strong> Skip <code>Ω(n log n)</code> by exploiting key structure. Not general-purpose.
+    </div>
+
+    <!-- RAPID REFERENCE -->
+    <div class="grid-2" style="margin-top:8pt;">
+        <div class="box">
+            <h4>📊 Stability Truth Table</h4>
+            <div style="font-size:8.5pt; line-height:1.35;">
+                <span class="check">✅ STABLE</span><br>
+                • Bubble Sort<br>
+                • Insertion Sort<br>
+                • Merge Sort<br>
+                • Counting / Radix<br><br>
+                <span class="cross">❌ UNSTABLE</span><br>
+                • Selection Sort<br>
+                • Quick Sort<br>
+                • Heap Sort<br>
+                • Shell Sort
+            </div>
+        </div>
+        <div class="box">
+            <h4>🔍 Complexity Patterns</h4>
+            <div style="font-size:8.5pt; line-height:1.35;">
+                • Two separate loops → <code>O(n)</code><br>
+                • Nested loops → <code>O(n²)</code><br>
+                • Loop halves/doubles → <code>O(log n)</code><br>
+                • Outer normal + inner log → <code>O(n log n)</code><br>
+                • Constant step <code>i+=3</code> → Still <code>O(n)</code>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXAM PRIORITY -->
+    <h2 style="margin-top:10pt;">🎯 Exam Priority & Golden Rules</h2>
+    <div class="grid-2">
+        <div class="box">
+            <h4>📈 Where to Focus</h4>
+            <ul style="margin:0; padding-left:14pt; font-size:9pt;">
+                <li><strong>Tier 1 (Trace Blind):</strong><br>Bubble, Insertion, Quick, Heap</li>
+                <li><strong>Tier 2 (Know Mechanism):</strong><br>Merge, Binary Search</li>
+                <li><strong>Tier 3 (Concept Only):</strong><br>Counting, Radix</li>
+            </ul>
+        </div>
+        <div class="box">
+            <h4>📝 5 Golden Sentences</h4>
+            <ol style="margin:0; padding-left:14pt; font-size:8.5pt;">
+                <li>QuickSort uses <code>O(log n)</code> stack — <strong>NOT <code>O(1)</code></strong></li>
+                <li>HeapSort is <strong>NOT stable</strong> — use Merge for stable <code>O(n log n)</code></li>
+                <li>Sequential loops → <strong>ADD</strong>. Nested → <strong>MULTIPLY</strong></li>
+                <li>Recursive depth ≈ <code>log₂n</code> for divide-and-conquer</li>
+                <li>Only <strong>Merge</strong> among <code>O(n log n)</code> sorts is stable</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="footer">
+        Printed: 2026-05-18 • SO4 Sorting Algorithms • Page 1/1 • <em>Make it stick.</em>
+    </div>
+</div>
+</body>
+</html>
